@@ -4,6 +4,7 @@ import cloudinary from "cloudinary";
 import Razorpay from "razorpay";
 import nodeCron from "node-cron";
 import { Stats } from "./models/Stats.js";
+import cors from "cors";
 
 connectDB();
 
@@ -25,6 +26,14 @@ nodeCron.schedule("0 0 0 1 * *", async () => {
     console.log(error);
   }
 });
+
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
 
 app.get("/", (req, res) =>
   res.send(
