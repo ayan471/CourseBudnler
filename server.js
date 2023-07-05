@@ -26,6 +26,12 @@ nodeCron.schedule("0 0 0 1 * *", async () => {
   }
 });
 
+app.get("/", (req, res) =>
+  res.send(
+    `<h1> Site is Working. click <a href=${process.env.FRONTEND_URL}>here</a> to visit frontend.</h1>`
+  )
+);
+
 app.listen(process.env.PORT, () => {
   console.log(`Server is working on port: ${process.env.PORT}`);
 });
