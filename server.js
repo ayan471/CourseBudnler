@@ -4,7 +4,6 @@ import cloudinary from "cloudinary";
 import Razorpay from "razorpay";
 import nodeCron from "node-cron";
 import { Stats } from "./models/Stats.js";
-import cors from "cors";
 
 connectDB();
 
@@ -26,20 +25,6 @@ nodeCron.schedule("0 0 0 1 * *", async () => {
     console.log(error);
   }
 });
-
-app.use(
-  cors({
-    origin: process.env.FRONTEND_URL,
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-  })
-);
-
-app.get("/", (req, res) =>
-  res.send(
-    `<h1> Site is Working. click <a href=${process.env.FRONTEND_URL}>here</a> to visit frontend.</h1>`
-  )
-);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is working on port: ${process.env.PORT}`);
